@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BDC — Alexandre · Ação 29/05</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:#1A7A3A;--ve:#145830;--o:#C9A227;--az:#0D1F2D;
+  --tx:#1C1C1E;--tx2:#6B6B6B;--bd:#E8E8E8;--bg:#F8F8F8;--w:#ffffff;
+  --r:#E24B4A;--a:#BA7517;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--tx);background:var(--bg);margin:0;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;background:var(--w);min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.08)}
+
+/* NAV */
+.nav{background:var(--az);padding:0 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;height:56px}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-dot{width:28px;height:28px;border-radius:50%;background:var(--o);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--az)}
+.nav-brand span{font-size:13px;font-weight:700;color:#fff}
+.nav-brand small{font-size:10px;color:rgba(255,255,255,.4);display:block}
+.urgencia-pill{background:rgba(226,75,74,.2);border:1px solid rgba(226,75,74,.4);color:#FCA5A5;font-size:11px;font-weight:700;padding:4px 12px;border-radius:20px;letter-spacing:.06em}
+
+/* HERO */
+.hero{background:var(--az);padding:40px 36px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 50px,rgba(255,255,255,.01) 50px,rgba(255,255,255,.01) 51px)}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(201,162,39,.15);border:1px solid rgba(201,162,39,.3);color:var(--o);font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.06em;position:relative;z-index:1}
+.hero h1{font-size:28px;font-weight:800;color:#fff;line-height:1.1;margin-bottom:8px;position:relative;z-index:1}
+.hero h1 span{color:#1D9E75}
+.hero p{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px;position:relative;z-index:1;line-height:1.6;max-width:520px}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;position:relative;z-index:1}
+.hg{border-top:2px solid rgba(255,255,255,.1);padding-top:12px}
+.hg strong{display:block;font-size:22px;font-weight:800;color:#1D9E75}
+.hg span{font-size:11px;color:rgba(255,255,255,.4);margin-top:2px;display:block;line-height:1.4}
+
+/* SECTION */
+.sec{padding:44px 36px;border-bottom:1px solid var(--bd)}
+.chip{font-size:10px;font-weight:700;color:var(--v);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.chip-o{font-size:10px;font-weight:700;color:var(--a);letter-spacing:.12em;text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-size:22px;font-weight:800;margin-bottom:8px;line-height:1.1}
+.sec-title span{color:var(--v)}
+.sec-sub{font-size:13px;color:var(--tx2);margin-bottom:24px;line-height:1.7;max-width:580px}
+
+/* CONTEXTO ALEXANDRE */
+.contexto-box{background:var(--bg);border-radius:12px;padding:20px 22px;border-left:4px solid var(--o);margin-bottom:20px}
+.contexto-box h3{font-size:14px;font-weight:700;color:var(--a);margin-bottom:8px}
+.contexto-box p{font-size:13px;color:var(--tx2);line-height:1.7;margin-bottom:8px}
+.contexto-box ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.contexto-box ul li{font-size:13px;color:var(--tx2);padding-left:16px;position:relative;line-height:1.4}
+.contexto-box ul li::before{content:"→";position:absolute;left:0;color:var(--o);font-size:11px;top:3px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl{display:flex;gap:0;cursor:pointer}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:52px;flex-shrink:0}
+.tl-circle{width:40px;height:40px;border-radius:50%;background:var(--bg);border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--tx2);transition:all .25s;flex-shrink:0}
+.tl-line{width:2px;flex:1;background:var(--bd);min-height:16px;margin:4px 0}
+.tl.on .tl-circle{background:var(--o);color:var(--az);border-color:var(--o)}
+.tl-body{padding:0 0 24px 14px;flex:1}
+.tl-head{padding:8px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tl-head h3{font-size:15px;font-weight:700;flex:1}
+.tl-hora{font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;background:#FEF3C7;color:#92400E}
+.tl-hora.r{background:#FEF2F2;color:#991B1B}
+.tl-content{background:var(--bg);border-radius:12px;padding:16px 18px;display:none;border:0.5px solid var(--bd)}
+.tl.on .tl-content{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.tl-content p{font-size:13px;color:var(--tx2);line-height:1.7;margin-bottom:10px}
+
+/* MENSAGENS */
+.msg-wrap{margin-bottom:12px}
+.msg-lbl{font-size:10px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.msg-box{background:#DCF8C6;border-radius:12px 12px 4px 12px;padding:14px 16px;font-size:13px;color:#1C1C1E;line-height:1.8;position:relative;white-space:pre-wrap;word-break:break-word}
+.msg-box.audio{background:#FEF9E7;border-left:3px solid var(--o)}
+.msg-box.audio::before{content:"🎙 Roteiro de áudio — ";font-weight:700;color:var(--a)}
+.copy-btn{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid var(--bd);background:var(--w);color:var(--tx2);cursor:pointer;font-family:inherit;transition:all .15s}
+.copy-btn:hover{background:var(--v);color:#fff;border-color:var(--v)}
+.copy-btn.copied{background:var(--v);color:#fff;border-color:var(--v)}
+.tl-tip{background:var(--w);border-radius:8px;padding:10px 14px;border-left:3px solid var(--o);margin-top:8px}
+.tl-tip p{font-size:12px;color:var(--tx2);line-height:1.6;font-style:italic;margin:0}
+.tl-tip strong{color:var(--a);font-style:normal}
+
+/* OBJEÇÕES */
+.obj-list{display:flex;flex-direction:column;gap:8px}
+.obj{border-radius:10px;border:1px solid var(--bd);overflow:hidden;cursor:pointer;background:var(--w)}
+.obj.on{border:1.5px solid var(--o)}
+.obj-head{padding:12px 16px;display:flex;align-items:center;gap:10px}
+.obj-head h4{font-size:13px;font-weight:700;flex:1}
+.obj-body{padding:0 16px 14px;display:none}
+.obj.on .obj-body{display:block;animation:fi .3s ease}
+.obj-diz{background:var(--bg);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--tx2);font-style:italic;margin-bottom:10px;border-left:3px solid var(--bd)}
+.obj-ancora{font-size:13px;color:var(--v);font-weight:700;background:#EFF9F2;border-radius:8px;padding:10px 12px}
+
+/* CHECKLIST */
+.check-list{display:flex;flex-direction:column;gap:8px}
+.check-item{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:var(--bg);border-radius:10px;border:0.5px solid var(--bd);cursor:pointer;transition:all .2s}
+.check-item:hover{border-color:var(--o)}
+.check-item.done{background:#FEF9E7;border-color:var(--o)}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--bd);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:1px;transition:all .2s;background:var(--w)}
+.check-item.done .check-box{background:var(--o);border-color:var(--o);color:var(--az)}
+.check-item p{font-size:13px;color:var(--tx2);line-height:1.5}
+.check-item strong{color:var(--tx);display:block;margin-bottom:2px;font-size:13px}
+
+/* HIGHLIGHT */
+.hl{background:#EFF9F2;border-radius:10px;padding:14px 18px;border-left:4px solid var(--v);margin-bottom:16px}
+.hl p{font-size:13px;color:var(--tx2);line-height:1.7}
+.hl strong{color:var(--v)}
+.hl-o{background:#FEF9E7;border-radius:10px;padding:14px 18px;border-left:4px solid var(--o);margin-bottom:16px}
+.hl-o p{font-size:13px;color:var(--tx2);line-height:1.7}
+.hl-o strong{color:var(--a)}
+.hl-r{background:#FEF2F2;border-radius:10px;padding:14px 18px;border-left:4px solid var(--r);margin-bottom:16px}
+.hl-r p{font-size:13px;color:#7F1D1D;line-height:1.7}
+
+/* META BOX */
+.meta-box{background:var(--az);border-radius:12px;padding:22px 26px;margin-bottom:20px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.mb{text-align:center}
+.mb strong{display:block;font-size:22px;font-weight:800;color:var(--o)}
+.mb span{font-size:11px;color:rgba(255,255,255,.4);margin-top:3px;display:block;line-height:1.4}
+
+/* REGRAS */
+.regras{display:flex;flex-direction:column;gap:8px}
+.regra{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;background:var(--bg);border-radius:10px}
+.regra-icon{width:28px;height:28px;border-radius:8px;background:var(--az);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.regra p{font-size:13px;color:var(--tx2);line-height:1.5}
+.regra strong{color:var(--tx);display:block;margin-bottom:2px}
+
+footer{background:var(--az);padding:18px 36px;display:flex;align-items:center;justify-content:space-between}
+footer span{font-size:11px;color:rgba(255,255,255,.25)}
+
+@media(max-width:640px){
+  .sec{padding:32px 20px}.hero{padding:32px 20px}
+  .hero-grid,.meta-box{grid-template-columns:1fr}
+  .nav .urgencia-pill{display:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<nav class="nav">
+  <div class="nav-brand">
+    <div class="nav-dot">A</div>
+    <div><span>Alexandre — BDC Comercial</span><small>Ação Webinar · 29/05</small></div>
+  </div>
+  <div class="urgencia-pill">⏰ ÚLTIMO DIA — 29/05</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">👋 Documento do Alexandre</div>
+  <h1>Sua ação comercial<br><span>de amanhã</span></h1>
+  <p>Tudo que você precisa para executar a ação do dia 29/05 — mensagens prontas, horários definidos e respostas para objeções.</p>
+  <div class="hero-grid">
+    <div class="hg"><strong>1 mensagem</strong><span>por lead — sem bombardear</span></div>
+    <div class="hg"><strong>R$ 197</strong><span>plataforma anual — oferta de encerramento</span></div>
+    <div class="hg"><strong>29/05</strong><span>último dia — urgência real</span></div>
+  </div>
+</div>
+
+<!-- ═══ CONTEXTO ═══ -->
+<div class="sec">
+  <div class="chip-o">Antes de começar — leia isso</div>
+  <h2 class="sec-title">O que você precisa <span>saber</span></h2>
+  <p class="sec-sub">Contexto essencial sobre esses leads antes de mandar qualquer mensagem.</p>
+
+  <div class="contexto-box">
+    <h3>Quem são essas pessoas</h3>
+    <p>São pais e mães de atletas jovens que demonstraram interesse no Base de Campeão. No início de maio, o Francis fez um webinar chamado <strong>"Meu filho quer ser jogador de futebol"</strong>. Esses leads:</p>
+    <ul>
+      <li>Participaram do webinar, ou demonstraram interesse mas não assistiram</li>
+      <li>Responderam alguma enquete do Instagram do Francis</li>
+      <li>Estão nos grupos de leads do BDC no WhatsApp</li>
+      <li>Ainda não compraram a plataforma</li>
+    </ul>
+  </div>
+
+  <div class="contexto-box">
+    <h3>O que você está vendendo</h3>
+    <p>A <strong>Plataforma Base de Campeão</strong> no plano anual por <strong>R$197</strong> — menos de R$17 por mês. É onde o pai acompanha a trajetória do filho no futebol de forma organizada, com orientações e clareza nas decisões.</p>
+    <p>Amanhã, 29/05, é o último dia com esse valor especial. Isso é real — não é gatilho artificial.</p>
+  </div>
+
+  <div class="hl-o">
+    <p><strong>Você não conhece essas pessoas — e elas não te conhecem.</strong> Por isso você vai se apresentar como parte do time do Base de Campeão. Tom leve, sem pressão, sem parecer automático. Uma mensagem por pessoa — se não responder, não insiste.</p>
+  </div>
+
+  <div class="meta-box">
+    <div class="mb"><strong>Meta</strong><span>do dia 29/05</span></div>
+    <div class="mb"><strong>5–15</strong><span>vendas da plataforma anual</span></div>
+    <div class="mb"><strong>Registrar tudo</strong><span>nome · respondeu · comprou</span></div>
+  </div>
+</div>
+
+<!-- ═══ FLUXO ═══ -->
+<div class="sec" style="background:var(--bg)">
+  <div class="chip">Fluxo do dia 29/05</div>
+  <h2 class="sec-title">Como executar <span>na prática</span></h2>
+  <p class="sec-sub">Três etapas no dia. Cada uma com mensagem pronta. Clique para abrir.</p>
+
+  <div class="hl-o">
+    <p><strong>Regra central:</strong> você vai mandar <strong>uma mensagem por lead</strong>. Se a pessoa responder, aí você conversa. Se não responder até o final do dia, não manda mais. Não bombardeia — isso queima o relacionamento do Francis com esses leads.</p>
+  </div>
+
+  <div class="timeline">
+
+    <!-- PASSO 1 -->
+    <div class="tl on" onclick="setTl(this)">
+      <div class="tl-left"><div class="tl-circle">1</div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-head">
+          <h3>Preparação — antes de enviar qualquer coisa</h3>
+          <span class="tl-hora">📋 Hoje à noite ou manhã cedo</span>
+        </div>
+        <div class="tl-content">
+          <p>Antes de mandar qualquer mensagem, organize a lista. Isso evita erro, duplicidade e te dá controle do dia.</p>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:10px">
+            <li style="font-size:13px;color:var(--tx2);padding-left:16px;position:relative;line-height:1.4"><span style="position:absolute;left:0;color:var(--o)">→</span>Anota o nome de cada lead em uma planilha simples</li>
+            <li style="font-size:13px;color:var(--tx2);padding-left:16px;position:relative;line-height:1.4"><span style="position:absolute;left:0;color:var(--o)">→</span>Confirma o link de compra com o Francis antes de começar</li>
+            <li style="font-size:13px;color:var(--tx2);padding-left:16px;position:relative;line-height:1.4"><span style="position:absolute;left:0;color:var(--o)">→</span>Lê as variações de mensagem abaixo e escolhe a que te sentires mais confortável</li>
+            <li style="font-size:13px;color:var(--tx2);padding-left:16px;position:relative;line-height:1.4"><span style="position:absolute;left:0;color:var(--o)">→</span>Define os horários de envio — e cumpre</li>
+          </ul>
+          <div class="tl-tip">
+            <p><strong>Guia-te pela planilha que o Francis vai te entregar.</strong> Ela já tem tudo organizado — só preenche conforme for avançando.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div class="tl" onclick="setTl(this)">
+      <div class="tl-left"><div class="tl-circle">2</div><div class="tl-line"></div></div>
+      <div class="tl-body">
+        <div class="tl-head">
+          <h3>Envio da mensagem principal</h3>
+          <span class="tl-hora">☀️ 09h–10h da manhã</span>
+        </div>
+        <div class="tl-content">
+          <p>São variações de abordagem — usa a que te sentires mais confortável. Testa versões diferentes para ver o que converte melhor.</p>
+
+          <div style="display:inline-block;background:#FEF9E7;border-radius:8px;padding:8px 14px;border-left:3px solid var(--o);margin-bottom:14px;font-size:12px;color:var(--a)"><strong>Sugestão — não obrigação.</strong> Se já tiver seu próprio jeito de abordar, ótimo. Use isso como referência.</div>
+
+          <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px">Variação 1 — Só texto</div>
+          <div class="msg-wrap">
+            <div class="msg-lbl">
+              <span>Texto direto e objetivo</span>
+              <button class="copy-btn" onclick="copiar(this,'msg1')">Copiar</button>
+            </div>
+            <div class="msg-box" id="msg1">Oi [nome], tudo bem?
+
+Me chamo Alexandre, faço parte do time do Base de Campeão.
+
+Você demonstrou interesse no webinar "Meu filho quer ser jogador de futebol" que a gente fez no começo do mês.
+
+Hoje é o último dia pra garantir a Plataforma Base de Campeão por R$197 no ano — menos de R$17 por mês.
+
+Se quiser dar uma olhada: [LINK]
+
+Qualquer dúvida é só me chamar 🙂</div>
+          </div>
+
+          <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin:14px 0 8px">Variação 2 — Só áudio</div>
+          <div class="msg-wrap">
+            <div class="msg-lbl"><span>Roteiro — 30 a 45 segundos, tom natural</span></div>
+            <div class="msg-box audio">Diz o nome da pessoa. Se apresenta: "Me chamo Alexandre, sou do time do Base de Campeão." Fala que a pessoa demonstrou interesse no webinar sobre filho no futebol. Diz que hoje é o último dia da oferta especial — R$197 no ano. Fala que vai mandar o link na sequência. Encerra com "qualquer dúvida é só responder aqui."</div>
+          </div>
+
+          <div style="font-size:11px;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.1em;margin:14px 0 8px">Variação 3 — Texto curto + áudio</div>
+          <div class="msg-wrap">
+            <div class="msg-lbl">
+              <span>1º — texto de abertura</span>
+              <button class="copy-btn" onclick="copiar(this,'msg3a')">Copiar</button>
+            </div>
+            <div class="msg-box" id="msg3a">Oi [nome]! Me chamo Alexandre, sou do time do Base de Campeão. Tenho um recado rápido pra você 👇</div>
+          </div>
+          <div class="msg-wrap">
+            <div class="msg-lbl"><span>2º — áudio logo depois (20 a 30 segundos)</span></div>
+            <div class="msg-box audio">Mais curto. Só diz: que ela demonstrou interesse no webinar do Francis, que hoje é o último dia da oferta especial por R$197 no ano, e que vai mandar o link. Direto.</div>
+          </div>
+          <div class="msg-wrap">
+            <div class="msg-lbl">
+              <span>3º — texto com o link</span>
+              <button class="copy-btn" onclick="copiar(this,'msg3b')">Copiar</button>
+            </div>
+            <div class="msg-box" id="msg3b">Aqui o link: [LINK] 🙂</div>
+          </div>
+
+          <div class="tl-tip" style="margin-top:8px">
+            <p><strong>Para testar:</strong> usa variação 1 nos primeiros contatos, variação 2 nos seguintes. Vê qual gera mais resposta e repete o que funcionar melhor.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div class="tl" onclick="setTl(this)">
+      <div class="tl-left"><div class="tl-circle">3</div></div>
+      <div class="tl-body">
+        <div class="tl-head">
+          <h3>Atenção às respostas — durante o dia todo</h3>
+          <span class="tl-hora r">🔔 O dia todo — prioridade máxima</span>
+        </div>
+        <div class="tl-content">
+          <p>Cada resposta é um lead quente. <strong>Não deixa ninguém esperando mais de 30 minutos.</strong> Quem responde quer comprar — só precisa de uma conversa rápida.</p>
+
+          <div class="tl-tip">
+            <p><strong>Se a pessoa perguntar algo sobre o produto</strong>, você responde o que sabe. Se não souber, fala: "Deixa eu confirmar com o Francis e já te retorno." Não inventa.</p>
+          </div>
+
+          <div class="msg-wrap" style="margin-top:12px">
+            <div class="msg-lbl">
+              <span>Se a pessoa disser que quer comprar mas está com dificuldade no link</span>
+              <button class="copy-btn" onclick="copiar(this,'msgLink')">Copiar</button>
+            </div>
+            <div class="msg-box" id="msgLink">Sem problema! O link direto é esse aqui: [LINK]
+
+Se ainda tiver dificuldade, me fala que a gente resolve 🙂</div>
+          </div>
+
+          <div class="msg-wrap" style="margin-top:10px">
+            <div class="msg-lbl">
+              <span>Confirmação de compra — quando a pessoa confirmar que comprou</span>
+              <button class="copy-btn" onclick="copiar(this,'msgCompra')">Copiar</button>
+            </div>
+            <div class="msg-box" id="msgCompra">Boa! Que bom que você garantiu 🙌
+
+O Francis vai entrar em contato em breve para te dar os próximos passos. Qualquer dúvida pode falar comigo aqui também. Bem-vindo ao Base de Campeão!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ OBJEÇÕES ═══ -->
+<div class="sec">
+  <div class="chip">Objeções — o que responder</div>
+  <h2 class="sec-title">Quatro situações que <span>vão aparecer</span></h2>
+  <p class="sec-sub">Respostas prontas para cada objeção. Clique para abrir.</p>
+
+  <div class="obj-list">
+
+    <div class="obj on" onclick="toggleObj(this)">
+      <div class="obj-head"><span style="font-size:16px">💭</span><h4>"Quanto custa mesmo?"</h4></div>
+      <div class="obj-body">
+        <div class="obj-diz">Sinal positivo — está quase decidido.</div>
+        <div class="msg-wrap">
+          <div class="msg-lbl"><span>Resposta</span><button class="copy-btn" onclick="copiar(this,'obj1')">Copiar</button></div>
+          <div class="msg-box" id="obj1">R$197 no plano anual — dá menos de R$17 por mês 😊
+
+Encerra hoje: [LINK]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="toggleObj(this)">
+      <div class="obj-head"><span style="font-size:16px">⏳</span><h4>"Posso assinar depois?"</h4></div>
+      <div class="obj-body">
+        <div class="obj-diz">Não tem clareza de que a oferta encerra hoje de verdade.</div>
+        <div class="msg-wrap">
+          <div class="msg-lbl"><span>Resposta</span><button class="copy-btn" onclick="copiar(this,'obj2')">Copiar</button></div>
+          <div class="msg-box" id="obj2">Pode, mas esse valor especial é só até hoje à meia-noite. Depois volta ao valor cheio.
+
+Se quiser garantir: [LINK] 🙂</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="toggleObj(this)">
+      <div class="obj-head"><span style="font-size:16px">🤔</span><h4>"O que tem na plataforma?"</h4></div>
+      <div class="obj-body">
+        <div class="obj-diz">Quer mais informação. Explica de forma simples — sem listar funcionalidades técnicas.</div>
+        <div class="msg-wrap">
+          <div class="msg-lbl"><span>Resposta</span><button class="copy-btn" onclick="copiar(this,'obj3')">Copiar</button></div>
+          <div class="msg-box" id="obj3">É basicamente o lugar onde você acompanha a trajetória do seu filho no futebol de forma organizada — com orientações do Francis, conteúdo sobre futebol de base e clareza pra você tomar as decisões certas em cada fase.
+
+Dá uma olhada no link que explica tudo: [LINK]</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="obj" onclick="toggleObj(this)">
+      <div class="obj-head"><span style="font-size:16px">❓</span><h4>"Quem é você? / Não te conheço"</h4></div>
+      <div class="obj-body">
+        <div class="obj-diz">Estranhamento pelo contato de alguém desconhecido. Normal — seja transparente.</div>
+        <div class="msg-wrap">
+          <div class="msg-lbl"><span>Resposta</span><button class="copy-btn" onclick="copiar(this,'obj4')">Copiar</button></div>
+          <div class="msg-box" id="obj4">Com certeza! Me chamo Alexandre e faço parte do time do Base de Campeão.
+
+Você demonstrou interesse no webinar que ele fez no começo do mês — por isso entrei em contato.
+
+Qualquer dúvida sobre o Francis ou o projeto: [LINK DA PÁGINA/INSTAGRAM]</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="hl-r" style="margin-top:16px">
+    <p><strong>Se surgir uma dúvida que você não sabe responder:</strong> não inventa. Fala "deixa eu confirmar com o Francis e já te retorno" — e confirma de verdade. Nunca promete algo que não tem certeza.</p>
+  </div>
+</div>
+
+<!-- ═══ REGRAS ═══ -->
+<div class="sec" style="background:var(--bg)">
+  <div class="chip">Regras do dia</div>
+  <h2 class="sec-title">O que você <span>não pode fazer</span></h2>
+  <p class="sec-sub">Simples e direto — siga isso e a ação vai bem.</p>
+
+  <div class="regras">
+    <div class="regra">
+      <div class="regra-icon">1</div>
+      <div><strong>Não manda mais de uma mensagem para quem não respondeu</strong><p>Uma mensagem por lead. Quem não respondeu até o final do dia, não insiste. Esses leads são do Francis — preserva o relacionamento.</p></div>
+    </div>
+    <div class="regra">
+      <div class="regra-icon">2</div>
+      <div><strong>Não manda mensagem idêntica para todo mundo</strong><p>Sempre coloca o nome. Sempre. Mensagem sem nome parece disparo automático e a taxa de resposta cai pela metade.</p></div>
+    </div>
+    <div class="regra">
+      <div class="regra-icon">3</div>
+      <div><strong>Não promete o que não sabe</strong><p>Se a pessoa perguntar algo sobre o produto que você não tem certeza, fala "vou confirmar com o Francis". Nunca inventa funcionalidade ou desconto não autorizado.</p></div>
+    </div>
+    <div class="regra">
+      <div class="regra-icon">4</div>
+      <div><strong>Registra tudo na planilha que o Francis vai te entregar</strong><p>Cada mensagem enviada, cada resposta, cada compra. No final do dia reporta o resultado.</p></div>
+    </div>
+    <div class="regra">
+      <div class="regra-icon">5</div>
+      <div><strong>Responde rápido quem interagiu</strong><p>Quem respondeu sua mensagem está quente. Não deixa mais de 30 minutos sem resposta. Essa é a janela de conversão — passado esse tempo, esfria.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CHECKLIST ═══ -->
+<div class="sec">
+  <div class="chip">Checklist do Alexandre</div>
+  <h2 class="sec-title">O que fazer antes de <span>começar a enviar</span></h2>
+
+  <div class="check-list">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div><strong>Confirmar o link de compra com o Francis</strong><p>Testa o link antes de mandar para qualquer pessoa.</p></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div><strong>Ter a lista de leads organizada com nomes</strong><p>Sem nome salvo, não manda — usa "Oi, tudo bem?" mesmo.</p></div>
+    </div>
+
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div><strong>Escolher a variação de mensagem e salvar em rascunho</strong><p>Já com o link inserido — só trocar o [nome] antes de cada envio.</p></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div><strong>Definir horário de início e cumprir</strong><p>Enviar tudo entre 09h e 10h. Não deixar para a tarde.</p></div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box">✓</div>
+      <div><strong>Reportar resultado ao Francis ao final do dia</strong><p>Total enviado · responderam · compraram · observações.</p></div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>
+  <span>Base de Campeão — Documento do Alexandre · 29/05</span>
+  <span>Confidencial · basedecampeao.com.br</span>
+</footer>
+
+<script>
+function setTl(el){
+  document.querySelectorAll('.tl').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+}
+function toggleObj(el){
+  const isOn=el.classList.contains('on');
+  document.querySelectorAll('.obj').forEach(o=>o.classList.remove('on'));
+  if(!isOn) el.classList.add('on');
+}
+function toggleCheck(el){
+  el.classList.toggle('done');
+  const box=el.querySelector('.check-box');
+  box.textContent=el.classList.contains('done')?'✓':'';
+}
+function copiar(btn,id){
+  const txt=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='Copiado!';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copiar';btn.classList.remove('copied');},2000);
+  });
+}
+</script>
+</body>
+</html>
